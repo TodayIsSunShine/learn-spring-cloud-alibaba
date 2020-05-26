@@ -2,7 +2,10 @@ package com.xiangzi.businessservice.controller;
 
 import com.xiangzi.businessservice.service.BusinessService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/business")
@@ -20,10 +23,10 @@ public class BusinessController {
      * @return
      */
     @GetMapping("/purchase")
-    public String purchase(@RequestParam("userId") String userId,
-                           @RequestParam("commodityCode") String commodityCode,
-                           @RequestParam("count") int count) {
-        businessService.purchase(userId, commodityCode, count);
-        return "调用结束";
+    public boolean purchase(@RequestParam("userId") String userId,
+                            @RequestParam("commodityCode") String commodityCode,
+                            @RequestParam("count") int count) {
+        return businessService.purchase(userId, commodityCode, count);
+
     }
 }

@@ -1,5 +1,5 @@
 
-package com.xiangzi.accountservice.config;
+package com.xiangzi.orderservice.config;
 
 
 import com.alibaba.druid.pool.DruidDataSource;

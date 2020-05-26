@@ -26,6 +26,7 @@ public class AccountServiceImpl implements AccountService {
         if (ERROR_USER_ID.endsWith(userId)) {
             throw new RuntimeException("fail");
         }
+        System.out.println("还款成功");
         return true;
 
     }

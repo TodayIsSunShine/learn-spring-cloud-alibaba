@@ -25,7 +25,6 @@ public class AccountController {
      */
     @GetMapping("/debit")
     public Boolean debit(@RequestParam("userId") String userId, @RequestParam("money") BigDecimal money) {
-        System.err.println("积分成功");
         return accountService.debit(userId, money);
     }
 }

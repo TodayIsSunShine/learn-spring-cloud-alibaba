@@ -1,12 +1,13 @@
-package com.xiangzi.orderservice.feign;
+package com.xiangzi.businessservice.feign;
 
+import com.xiangzi.businessservice.service.fallback.AccountFallback;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.math.BigDecimal;
 
-@FeignClient(name = "account-service")
+@FeignClient(name = "account-service", fallback = AccountFallback.class)
 public interface AccountFeignClient {
 
     @GetMapping("/account/debit")

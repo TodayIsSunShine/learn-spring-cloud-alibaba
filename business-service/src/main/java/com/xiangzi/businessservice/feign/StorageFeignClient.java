@@ -1,4 +1,4 @@
-package com.xiangzi.orderservice.feign;
+package com.xiangzi.businessservice.feign;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

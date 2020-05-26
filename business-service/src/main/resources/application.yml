@@ -4,3 +4,20 @@ server:
 spring:
   application:
     name: business-service
+  cloud:
+    alibaba:
+      seata:
+        tx-service-group: business_server_seata
+
+eureka:
+  instance:
+    hostname: localhost
+    appname: ${spring.application.name}
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://admin:admin-eureka@106.13.162.44:8110/eureka
+
+feign:
+  hystrix:
+    enabled: true

@@ -1,25 +1,34 @@
 package com.xiangzi.businessservice.service.impl;
 
-import com.xiangzi.businessservice.feign.AccountService;
-import com.xiangzi.businessservice.feign.OrderService;
-import com.xiangzi.businessservice.feign.StorageService;
+import com.xiangzi.businessservice.feign.AccountFeignClient;
+import com.xiangzi.businessservice.feign.OrderFeignClient;
+import com.xiangzi.businessservice.feign.StorageFeignClient;
 import com.xiangzi.businessservice.service.BusinessService;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 
 @Service
 public class BusinessServiceImpl implements BusinessService {
 
     @Autowired
-    private OrderService orderService;
+    private OrderFeignClient orderFeignClient;
     @Autowired
-    private AccountService accountService;
+    private AccountFeignClient accountFeignClient;
     @Autowired
-    private StorageService storageService;
+    private StorageFeignClient storageFeignClient;
 
+    @GlobalTransactional
     @Override
-    public void purchase(String userId, String commodityCode, int orderCount) {
-        storageService.deduct(commodityCode, orderCount);
-
+    public boolean purchase(String userId, String commodityCode, int orderCount) {
+        orderFeignClient.create(userId, commodityCode, orderCount);
+        System.out.println("----下单成功---");
+        accountFeignClient.debit(userId, new BigDecimal(5));
+        System.out.println("---余额扣减成功---");
+        storageFeignClient.deduct(commodityCode, orderCount);
+        System.out.println("---库存扣减成功---");
+        return true;
     }
 }

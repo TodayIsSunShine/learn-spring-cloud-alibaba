@@ -4,7 +4,24 @@ server:
 spring:
   application:
     name: storage-service
+  datasource:
+    username: dev_tools
+    password: dev_tools
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://pipiwanshui.mysql.rds.aliyuncs.com:3306/seata-storage?characterEncoding=utf8&useSSL=true&serverTimezone=Asia/Shanghai
+    type: com.alibaba.druid.pool.DruidDataSource
+
+  jpa:
+    show-sql: true
   cloud:
-    nacos:
-      discovery:
-        server-addr: 106.13.162.44:8848
+    alibaba:
+      seata:
+        tx-service-group: storage_server_seata
+eureka:
+  instance:
+    hostname: localhost
+    appname: ${spring.application.name}
+  client:
+    service-url:
+      defaultZone: http://admin:admin-eureka@106.13.162.44:8110/eureka
+
