@@ -19,9 +19,12 @@ spring:
         tx-service-group: storage_server_seata
 eureka:
   instance:
-    hostname: localhost
     appname: ${spring.application.name}
   client:
     service-url:
       defaultZone: http://admin:admin-eureka@106.13.162.44:8110/eureka
+
+logging:
+  level:
+    com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver: warn #禁止打印发送心跳检测日志
 
