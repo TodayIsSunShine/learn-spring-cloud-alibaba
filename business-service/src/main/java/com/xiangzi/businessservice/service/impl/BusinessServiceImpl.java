@@ -28,7 +28,7 @@ public class BusinessServiceImpl implements BusinessService {
         accountFeignClient.debit(userId, new BigDecimal(5));
         System.out.println("---余额扣减成功---");
         storageFeignClient.deduct(commodityCode, orderCount);
-        System.out.println("---库存扣减成功11---");
+        System.out.println("---库存扣减成功---");
         return true;
     }
 }
